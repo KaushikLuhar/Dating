@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, Image, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { ArrowLeft, Phone } from 'lucide-react-native';
@@ -8,6 +8,8 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/Button';
 import { PhoneInput } from '@/components/ui/PhoneInput';
 import { Card } from '@/components/ui/Card';
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 export default function PhoneRegisterScreen() {
   const { theme } = useTheme();
@@ -81,20 +83,33 @@ export default function PhoneRegisterScreen() {
     content: {
       flex: 1,
       paddingHorizontal: 24,
+      paddingTop: 20,
+    },
+    imageSection: {
+      alignItems: 'center',
+      marginBottom: 32,
+    },
+    phoneImage: {
+      width: SCREEN_WIDTH * 0.6,
+      height: SCREEN_WIDTH * 0.4,
+      borderRadius: 16,
+      marginBottom: 24,
     },
     title: {
-      fontSize: 28,
+      fontSize: SCREEN_WIDTH < 375 ? 24 : 28,
       fontFamily: 'Inter-SemiBold',
       color: theme.colors.text,
       marginBottom: 8,
       textAlign: 'center',
     },
     subtitle: {
-      fontSize: 16,
+      fontSize: SCREEN_WIDTH < 375 ? 14 : 16,
       fontFamily: 'Inter-Regular',
       color: theme.colors.textSecondary,
       textAlign: 'center',
-      marginBottom: 40,
+      marginBottom: 32,
+      lineHeight: 22,
+      paddingHorizontal: 16,
     },
     phoneContainer: {
       flexDirection: 'row',
@@ -104,9 +119,9 @@ export default function PhoneRegisterScreen() {
       alignItems: 'stretch',
     },
     countryCode: {
-      width: 40,
-      minWidth: 40,
-      maxWidth: 40,
+      width: SCREEN_WIDTH < 375 ? 70 : 80,
+      minWidth: SCREEN_WIDTH < 375 ? 70 : 80,
+      maxWidth: SCREEN_WIDTH < 375 ? 70 : 80,
     },
     phoneInput: {
       flex: 1,
@@ -117,6 +132,7 @@ export default function PhoneRegisterScreen() {
       alignItems: 'flex-start',
       marginVertical: 24,
       gap: 12,
+      paddingHorizontal: 4,
     },
     checkbox: {
       width: 20,
@@ -127,6 +143,7 @@ export default function PhoneRegisterScreen() {
       justifyContent: 'center',
       alignItems: 'center',
       marginTop: 2,
+      flexShrink: 0,
     },
     checkboxChecked: {
       backgroundColor: theme.colors.primary,
@@ -134,20 +151,22 @@ export default function PhoneRegisterScreen() {
     },
     checkboxText: {
       flex: 1,
-      fontSize: 14,
+      fontSize: SCREEN_WIDTH < 375 ? 13 : 14,
       fontFamily: 'Inter-Regular',
       color: theme.colors.textSecondary,
       lineHeight: 20,
     },
     termsLink: {
       color: theme.colors.primary,
+      fontFamily: 'Inter-Medium',
     },
     errorText: {
-      fontSize: 14,
+      fontSize: SCREEN_WIDTH < 375 ? 13 : 14,
       fontFamily: 'Inter-Regular',
       color: theme.colors.error,
       textAlign: 'center',
       marginBottom: 16,
+      paddingHorizontal: 16,
     },
   });
 
@@ -165,9 +184,17 @@ export default function PhoneRegisterScreen() {
 
       <ScrollView 
         style={styles.content}
-        contentContainerStyle={{ justifyContent: 'center' }}
+        contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
         showsVerticalScrollIndicator={false}
       >
+        <View style={styles.imageSection}>
+          <Image
+            source={{ uri: 'https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=800' }}
+            style={styles.phoneImage}
+            resizeMode="cover"
+          />
+        </View>
+
         <Text style={styles.title}>Enter Your Phone</Text>
         <Text style={styles.subtitle}>
           We'll send you a verification code to confirm your number

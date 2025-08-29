@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, Alert, Dimensions } from 'react-native';
 import { Camera, Plus, X } from 'lucide-react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 interface PhotoStepProps {
   data: any;
@@ -53,27 +55,30 @@ export function PhotoStep({ data, updateData }: PhotoStepProps) {
       paddingVertical: 20,
     },
     title: {
-      fontSize: 24,
+      fontSize: SCREEN_WIDTH < 375 ? 22 : 24,
       fontFamily: 'Inter-SemiBold',
       color: theme.colors.text,
       marginBottom: 8,
       textAlign: 'center',
+      paddingHorizontal: 16,
     },
     subtitle: {
-      fontSize: 16,
+      fontSize: SCREEN_WIDTH < 375 ? 14 : 16,
       fontFamily: 'Inter-Regular',
       color: theme.colors.textSecondary,
       textAlign: 'center',
       marginBottom: 32,
+      lineHeight: 22,
+      paddingHorizontal: 16,
     },
     photosGrid: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      gap: 12,
+      gap: SCREEN_WIDTH < 375 ? 8 : 12,
       marginBottom: 24,
     },
     photoSlot: {
-      width: '48%',
+      width: SCREEN_WIDTH < 375 ? '47%' : '48%',
       aspectRatio: 3/4,
       borderRadius: 12,
       backgroundColor: theme.colors.surface,
@@ -102,28 +107,29 @@ export function PhotoStep({ data, updateData }: PhotoStepProps) {
       padding: 4,
     },
     addPhotoText: {
-      fontSize: 14,
+      fontSize: SCREEN_WIDTH < 375 ? 12 : 14,
       fontFamily: 'Inter-Medium',
       color: theme.colors.textSecondary,
       marginTop: 8,
+      textAlign: 'center',
     },
     tips: {
       backgroundColor: theme.colors.surface,
       borderRadius: 12,
-      padding: 16,
+      padding: SCREEN_WIDTH < 375 ? 12 : 16,
     },
     tipsTitle: {
-      fontSize: 16,
+      fontSize: SCREEN_WIDTH < 375 ? 15 : 16,
       fontFamily: 'Inter-Medium',
       color: theme.colors.text,
       marginBottom: 12,
     },
     tip: {
-      fontSize: 14,
+      fontSize: SCREEN_WIDTH < 375 ? 13 : 14,
       fontFamily: 'Inter-Regular',
       color: theme.colors.textSecondary,
       marginBottom: 8,
-      lineHeight: 20,
+      lineHeight: SCREEN_WIDTH < 375 ? 18 : 20,
     },
   });
 

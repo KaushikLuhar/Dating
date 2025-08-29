@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert, Dimensions } from 'react-native';
 import { MapPin, Navigation } from 'lucide-react-native';
 import { Platform } from 'react-native';
 
@@ -11,6 +11,8 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 interface LocationStepProps {
   data: any;
@@ -79,18 +81,21 @@ export function LocationStep({ data, updateData }: LocationStepProps) {
       paddingVertical: 20,
     },
     title: {
-      fontSize: 24,
+      fontSize: SCREEN_WIDTH < 375 ? 22 : 24,
       fontFamily: 'Inter-SemiBold',
       color: theme.colors.text,
       marginBottom: 8,
       textAlign: 'center',
+      paddingHorizontal: 16,
     },
     subtitle: {
-      fontSize: 16,
+      fontSize: SCREEN_WIDTH < 375 ? 14 : 16,
       fontFamily: 'Inter-Regular',
       color: theme.colors.textSecondary,
       textAlign: 'center',
       marginBottom: 32,
+      lineHeight: 22,
+      paddingHorizontal: 16,
     },
     locationButton: {
       marginBottom: 24,
@@ -114,9 +119,11 @@ export function LocationStep({ data, updateData }: LocationStepProps) {
     inputRow: {
       flexDirection: 'row',
       gap: 12,
+      alignItems: 'flex-start',
     },
     inputHalf: {
       flex: 1,
+      minWidth: 0,
     },
   });
 

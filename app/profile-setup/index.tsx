@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import PagerView from '@/components/ui/WebPagerView';
 import { useRouter } from 'expo-router';
@@ -13,6 +13,8 @@ import { PhotoStep } from '@/components/profile-setup/PhotoStep';
 import { BioStep } from '@/components/profile-setup/BioStep';
 import { InterestsStep } from '@/components/profile-setup/InterestsStep';
 import { PreferencesStep } from '@/components/profile-setup/PreferencesStep';
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const steps = [
   { title: 'Basic Info', component: BasicInfoStep },
@@ -73,32 +75,35 @@ export default function ProfileSetupScreen() {
       alignItems: 'center',
       justifyContent: 'space-between',
       paddingHorizontal: 24,
-      paddingVertical: 16,
+      paddingVertical: SCREEN_WIDTH < 375 ? 12 : 16,
     },
     headerLeft: {
       flexDirection: 'row',
       alignItems: 'center',
+      flex: 1,
     },
     backButton: {
       padding: 8,
-      marginRight: 16,
+      marginRight: SCREEN_WIDTH < 375 ? 12 : 16,
     },
     headerTitle: {
-      fontSize: 20,
+      fontSize: SCREEN_WIDTH < 375 ? 18 : 20,
       fontFamily: 'Inter-SemiBold',
       color: theme.colors.text,
+      flex: 1,
     },
     stepCounter: {
-      fontSize: 16,
+      fontSize: SCREEN_WIDTH < 375 ? 14 : 16,
       fontFamily: 'Inter-Medium',
       color: theme.colors.textSecondary,
+      flexShrink: 0,
     },
     progressContainer: {
       paddingHorizontal: 24,
-      marginBottom: 20,
+      marginBottom: SCREEN_WIDTH < 375 ? 16 : 20,
     },
     progressBar: {
-      height: 6,
+      height: SCREEN_WIDTH < 375 ? 4 : 6,
       backgroundColor: theme.colors.border,
       borderRadius: 3,
       overflow: 'hidden',
@@ -115,8 +120,9 @@ export default function ProfileSetupScreen() {
       flexDirection: 'row',
       justifyContent: 'space-between',
       paddingHorizontal: 24,
-      paddingVertical: 20,
-      gap: 16,
+      paddingVertical: SCREEN_WIDTH < 375 ? 16 : 20,
+      paddingBottom: Platform.OS === 'ios' ? 40 : (SCREEN_WIDTH < 375 ? 16 : 20),
+      gap: SCREEN_WIDTH < 375 ? 12 : 16,
     },
     backButtonFooter: {
       flex: 1,

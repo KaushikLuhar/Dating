@@ -1,6 +1,8 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle, Dimensions } from 'react-native';
 import { useTheme } from '@/contexts/ThemeContext';
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 interface ButtonProps {
   title: string;
@@ -34,9 +36,21 @@ export function Button({
     };
 
     const sizeStyles = {
-      small: { paddingHorizontal: 16, paddingVertical: 8, minHeight: 36 },
-      medium: { paddingHorizontal: 24, paddingVertical: 12, minHeight: 48 },
-      large: { paddingHorizontal: 32, paddingVertical: 16, minHeight: 56 },
+      small: { 
+        paddingHorizontal: SCREEN_WIDTH < 375 ? 12 : 16, 
+        paddingVertical: SCREEN_WIDTH < 375 ? 6 : 8, 
+        minHeight: SCREEN_WIDTH < 375 ? 32 : 36 
+      },
+      medium: { 
+        paddingHorizontal: SCREEN_WIDTH < 375 ? 20 : 24, 
+        paddingVertical: SCREEN_WIDTH < 375 ? 10 : 12, 
+        minHeight: SCREEN_WIDTH < 375 ? 44 : 48 
+      },
+      large: { 
+        paddingHorizontal: SCREEN_WIDTH < 375 ? 28 : 32, 
+        paddingVertical: SCREEN_WIDTH < 375 ? 14 : 16, 
+        minHeight: SCREEN_WIDTH < 375 ? 52 : 56 
+      },
     };
 
     const variantStyles = {
@@ -81,9 +95,9 @@ export function Button({
     };
 
     const sizeStyles = {
-      small: { fontSize: 14 },
-      medium: { fontSize: 16 },
-      large: { fontSize: 18 },
+      small: { fontSize: SCREEN_WIDTH < 375 ? 13 : 14 },
+      medium: { fontSize: SCREEN_WIDTH < 375 ? 15 : 16 },
+      large: { fontSize: SCREEN_WIDTH < 375 ? 16 : 18 },
     };
 
     const variantStyles = {

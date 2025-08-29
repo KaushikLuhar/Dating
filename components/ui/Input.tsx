@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TextInputProps } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TextInputProps, Dimensions } from 'react-native';
 import { useTheme } from '@/contexts/ThemeContext';
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 interface InputProps extends TextInputProps {
   label?: string;
@@ -27,7 +29,7 @@ export function Input({
       marginBottom: noMargin ? 0 : 16,
     },
     label: {
-      fontSize: 14,
+      fontSize: SCREEN_WIDTH < 375 ? 13 : 14,
       fontFamily: 'Inter-Medium',
       color: theme.colors.text,
       marginBottom: 8,
@@ -43,8 +45,8 @@ export function Input({
         : isFocused 
           ? theme.colors.primary 
           : theme.colors.border,
-      paddingHorizontal: 16,
-      minHeight: 52,
+      paddingHorizontal: SCREEN_WIDTH < 375 ? 12 : 16,
+      minHeight: SCREEN_WIDTH < 375 ? 48 : 52,
       shadowColor: theme.colors.primary,
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: isFocused ? 0.1 : 0,
@@ -53,15 +55,15 @@ export function Input({
     },
     input: {
       flex: 1,
-      fontSize: 16,
+      fontSize: SCREEN_WIDTH < 375 ? 15 : 16,
       fontFamily: 'Inter-Regular',
       color: theme.colors.text,
       paddingVertical: 12,
-      marginLeft: leftIcon ? 12 : 0,
-      marginRight: rightIcon ? 12 : 0,
+      marginLeft: leftIcon ? (SCREEN_WIDTH < 375 ? 8 : 12) : 0,
+      marginRight: rightIcon ? (SCREEN_WIDTH < 375 ? 8 : 12) : 0,
     },
     error: {
-      fontSize: 12,
+      fontSize: SCREEN_WIDTH < 375 ? 11 : 12,
       fontFamily: 'Inter-Regular',
       color: theme.colors.error,
       marginTop: 4,

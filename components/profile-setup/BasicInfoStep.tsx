@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { User, Calendar } from 'lucide-react-native';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Input } from '@/components/ui/Input';
 import { Card } from '@/components/ui/Card';
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 interface BasicInfoStepProps {
   data: any;
@@ -44,24 +46,27 @@ export function BasicInfoStep({ data, updateData }: BasicInfoStepProps) {
       paddingVertical: 20,
     },
     title: {
-      fontSize: 24,
+      fontSize: SCREEN_WIDTH < 375 ? 22 : 24,
       fontFamily: 'Inter-SemiBold',
       color: theme.colors.text,
       marginBottom: 8,
       textAlign: 'center',
+      paddingHorizontal: 16,
     },
     subtitle: {
-      fontSize: 16,
+      fontSize: SCREEN_WIDTH < 375 ? 14 : 16,
       fontFamily: 'Inter-Regular',
       color: theme.colors.textSecondary,
       textAlign: 'center',
       marginBottom: 32,
+      lineHeight: 22,
+      paddingHorizontal: 16,
     },
     section: {
       marginBottom: 24,
     },
     sectionTitle: {
-      fontSize: 18,
+      fontSize: SCREEN_WIDTH < 375 ? 16 : 18,
       fontFamily: 'Inter-Medium',
       color: theme.colors.text,
       marginBottom: 16,
@@ -69,14 +74,14 @@ export function BasicInfoStep({ data, updateData }: BasicInfoStepProps) {
     genderGrid: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      gap: 12,
+      gap: SCREEN_WIDTH < 375 ? 8 : 12,
     },
     genderOption: {
       flex: 1,
-      minWidth: '45%',
+      minWidth: SCREEN_WIDTH < 375 ? '47%' : '45%',
       backgroundColor: theme.colors.surface,
       borderRadius: 12,
-      padding: 16,
+      padding: SCREEN_WIDTH < 375 ? 12 : 16,
       borderWidth: 2,
       borderColor: theme.colors.border,
       alignItems: 'center',
@@ -86,7 +91,7 @@ export function BasicInfoStep({ data, updateData }: BasicInfoStepProps) {
       backgroundColor: `${theme.colors.primary}10`,
     },
     genderText: {
-      fontSize: 16,
+      fontSize: SCREEN_WIDTH < 375 ? 14 : 16,
       fontFamily: 'Inter-Medium',
       color: theme.colors.text,
     },

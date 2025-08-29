@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
@@ -124,23 +124,25 @@ export default function OnboardingScreen() {
       marginBottom: 40,
     },
     title: {
-      fontSize: 28,
+      fontSize: SCREEN_WIDTH < 375 ? 24 : 28,
       fontFamily: 'Inter-SemiBold',
       color: theme.colors.text,
       textAlign: 'center',
       marginBottom: 16,
+      paddingHorizontal: 16,
+      lineHeight: SCREEN_WIDTH < 375 ? 28 : 32,
     },
     description: {
-      fontSize: 16,
+      fontSize: SCREEN_WIDTH < 375 ? 14 : 16,
       fontFamily: 'Inter-Regular',
       color: theme.colors.textSecondary,
       textAlign: 'center',
-      lineHeight: 24,
+      lineHeight: SCREEN_WIDTH < 375 ? 20 : 24,
       paddingHorizontal: 16,
     },
     footer: {
       paddingHorizontal: 24,
-      paddingBottom: 40,
+      paddingBottom: Platform.OS === 'ios' ? 40 : 24,
     },
     buttonContainer: {
       marginTop: 20,

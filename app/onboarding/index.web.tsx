@@ -125,18 +125,21 @@ export default function OnboardingScreen() {
       marginBottom: 32,
     },
     title: {
-      fontSize: 28,
-      fontFamily: 'Inter-Bold',
+      fontSize: SCREEN_WIDTH < 768 ? 24 : 28,
+      fontFamily: 'Inter-SemiBold',
       color: theme.colors.text,
       textAlign: 'center',
       marginBottom: 16,
+      paddingHorizontal: 16,
+      lineHeight: SCREEN_WIDTH < 768 ? 28 : 32,
     },
     description: {
-      fontSize: 16,
+      fontSize: SCREEN_WIDTH < 768 ? 14 : 16,
       fontFamily: 'Inter-Regular',
       color: theme.colors.textSecondary,
       textAlign: 'center',
-      lineHeight: 24,
+      lineHeight: SCREEN_WIDTH < 768 ? 20 : 24,
+      paddingHorizontal: 16,
     },
     footer: {
       paddingHorizontal: 24,
@@ -146,10 +149,12 @@ export default function OnboardingScreen() {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
+      gap: 16,
     },
     pageIndicator: {
       flexDirection: 'row',
       gap: 8,
+      flex: 1,
     },
     dot: {
       width: 8,
